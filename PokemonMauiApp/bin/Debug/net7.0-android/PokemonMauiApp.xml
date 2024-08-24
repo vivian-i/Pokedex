@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PokemonMauiApp</name>
+    </assembly>
+    <members>
+        <member name="T:PokemonMauiApp.Services.PokemonService">
+            get pokemon from pokemon api (or from pokemonList if it's not empty)
+        </member>
+        <member name="M:PokemonMauiApp.Services.PokemonService.GetPokemonById(System.Int32)">
+            get a pokemon by id
+        </member>
+        <member name="T:PokemonMauiApp.ViewModel.BaseViewModel">
+            base vm: contains Title (title of page), IsBusy and IsNotBusy (for activity indicator)
+            <inheritdoc/>
+        </member>
+        <member name="P:PokemonMauiApp.ViewModel.BaseViewModel.IsBusy">
+            <inheritdoc cref="F:PokemonMauiApp.ViewModel.BaseViewModel.isBusy"/>
+        </member>
+        <member name="P:PokemonMauiApp.ViewModel.BaseViewModel.Title">
+            <inheritdoc cref="F:PokemonMauiApp.ViewModel.BaseViewModel.title"/>
+        </member>
+        <member name="T:PokemonMauiApp.ViewModel.PokemonDetailsViewModel">
+            pokemon details vm.
+            from main vm (GoToDetailsAsync() method) -> this detail vm
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:PokemonMauiApp.ViewModel.PokemonDetailsViewModel.Pokemon">
+            <inheritdoc cref="F:PokemonMauiApp.ViewModel.PokemonDetailsViewModel.pokemon"/>
+        </member>
+        <member name="F:PokemonMauiApp.ViewModel.PokemonDetailsViewModel.openMapCommand">
+            <summary>The backing field for <see cref="P:PokemonMauiApp.ViewModel.PokemonDetailsViewModel.OpenMapCommand"/>.</summary>
+        </member>
+        <member name="P:PokemonMauiApp.ViewModel.PokemonDetailsViewModel.OpenMapCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:PokemonMauiApp.ViewModel.PokemonDetailsViewModel.OpenMapAsync"/>.</summary>
+        </member>
+        <member name="T:PokemonMauiApp.ViewModel.PokemonsViewModel">
+            main vm
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="M:PokemonMauiApp.ViewModel.PokemonsViewModel.GetClosestPokemonAsync">
+            get the closest pokemon
+        </member>
+        <member name="M:PokemonMauiApp.ViewModel.PokemonsViewModel.GetPokemonsByIdAsync">
+            get all pokemons by id
+        </member>
+        <member name="M:PokemonMauiApp.ViewModel.PokemonsViewModel.GoToDetailsAsync(PokemonMauiApp.Model.Pokemon)">
+            go to pokemon details page
+        </member>
+        <member name="P:PokemonMauiApp.ViewModel.PokemonsViewModel.IsRefreshing">
+            <inheritdoc cref="F:PokemonMauiApp.ViewModel.PokemonsViewModel.isRefreshing"/>
+        </member>
+        <member name="F:PokemonMauiApp.ViewModel.PokemonsViewModel.getClosestPokemonCommand">
+            <summary>The backing field for <see cref="P:PokemonMauiApp.ViewModel.PokemonsViewModel.GetClosestPokemonCommand"/>.</summary>
+        </member>
+        <member name="P:PokemonMauiApp.ViewModel.PokemonsViewModel.GetClosestPokemonCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:PokemonMauiApp.ViewModel.PokemonsViewModel.GetClosestPokemonAsync"/>.</summary>
+        </member>
+        <member name="F:PokemonMauiApp.ViewModel.PokemonsViewModel.getPokemonsByIdCommand">
+            <summary>The backing field for <see cref="P:PokemonMauiApp.ViewModel.PokemonsViewModel.GetPokemonsByIdCommand"/>.</summary>
+        </member>
+        <member name="P:PokemonMauiApp.ViewModel.PokemonsViewModel.GetPokemonsByIdCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:PokemonMauiApp.ViewModel.PokemonsViewModel.GetPokemonsByIdAsync"/>.</summary>
+        </member>
+        <member name="F:PokemonMauiApp.ViewModel.PokemonsViewModel.goToDetailsCommand">
+            <summary>The backing field for <see cref="P:PokemonMauiApp.ViewModel.PokemonsViewModel.GoToDetailsCommand"/>.</summary>
+        </member>
+        <member name="P:PokemonMauiApp.ViewModel.PokemonsViewModel.GoToDetailsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:PokemonMauiApp.ViewModel.PokemonsViewModel.GoToDetailsAsync(PokemonMauiApp.Model.Pokemon)"/>.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Pokemon">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Pokemon" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsNotBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsNotBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Pokemon">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Pokemon" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+    </members>
+</doc>

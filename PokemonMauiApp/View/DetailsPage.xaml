@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PokemonMauiApp.View.DetailsPage"
+             xmlns:model="clr-namespace:PokemonMauiApp.Model"
+             xmlns:viewmodel="clr-namespace:PokemonMauiApp.ViewModel"
+             x:DataType="viewmodel:PokemonDetailsViewModel"
+             xmlns:local="clr-namespace:PokemonMauiApp.Converters"
+             Title="{Binding Pokemon.Name}"
+             >
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ValueToWidthConverter x:Key="ValueToWidthConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ScrollView>
+        <!-- header, image, pokemon details -->
+        <Grid ColumnDefinitions="*,Auto,*"
+              RowDefinitions="170,*">
+
+            <!-- header: name, types, id-->
+            <VerticalStackLayout
+                Grid.ColumnSpan="3"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                BackgroundColor="{Binding Pokemon.Color}"
+                Padding="10">
+                
+                <Grid Padding="5"
+                      RowDefinitions="*,*">
+                    <!-- name -->
+                    <Label Text="{Binding Pokemon.Name}"
+                        TextColor="White"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        ></Label>
+                    <!-- id -->
+                    <Label Text="{Binding Pokemon.Id, StringFormat='#{0}'}" 
+                           FontSize="17"
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           HorizontalOptions="EndAndExpand"
+                           Grid.Column="2"
+                           ></Label>
+
+                    <!-- list of types-->
+                    <CollectionView ItemsSource="{Binding Pokemon.Types}"
+                                    Grid.Row="1">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"
+                                               ItemSpacing="5"
+                                               />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Type">
+                                <Frame Style="{StaticResource pokemonTypesFrame}">
+                                    <Label Text="{Binding Type2.Name}"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center"
+                                               >
+                                    </Label>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+                
+            </VerticalStackLayout>
+
+
+            <!-- pokemon image zIndex is the top most which is 2. pokemon details is 1. others are 0 by default 
+                zIndex = pokemon image > pokemon details > header background -->
+            <Image Source="{Binding Pokemon.Sprites.Other.OfficialArtwork.FrontDefault}"
+                    HeightRequest="170"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Grid.RowSpan="1"
+                    ZIndex="2"
+                    Margin="0,65,0,0"
+                    ></Image>
+
+            
+            
+            <!-- pokemon details background -->
+            <BoxView Grid.ColumnSpan="3"
+                    Grid.Row="1"
+                    CornerRadius="17,17,0,0"
+                    Color="White"
+            />
+
+            <VerticalStackLayout  Grid.Row="1"
+                                  Grid.ColumnSpan="3"
+                                  Padding="22">
+
+                <!-- button to open map based on pokemon location -->
+                <Button Text="Open Map"
+                    Command="{Binding OpenMapCommand}"
+                    Margin="0,0,0,12"
+                    CornerRadius="15"
+                    BackgroundColor="Transparent"
+                    TextColor="Black"
+                    BorderColor="Black"
+                    HorizontalOptions="Center"
+                ></Button>
+
+                <!-- pokemon details: base stats -->
+                <CollectionView ItemsSource="{Binding Pokemon.Stats}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Stat">
+                            <Grid ColumnDefinitions="Auto,Auto,*"
+                                  ColumnSpacing="10"
+                                  >
+                                <!-- pokemon stats name and value -->
+                                <HorizontalStackLayout Spacing="30">
+                                    <Label Text="{Binding Stat2.Name}"
+                                           WidthRequest="125"
+                                           FontSize="13"></Label>
+                                    <Label Text="{Binding BaseStat}"
+                                           FontSize="13"></Label>
+                                </HorizontalStackLayout>
+
+                                <!-- horizontal chart for pokemon stats value -->
+                                <Grid x:Name="pokemonStatsChartGrid"
+                                    Grid.Column="2">
+                                    <BoxView HeightRequest="10"
+                                             HorizontalOptions="FillAndExpand"
+                                             Color="LightGray"/>
+                                    <BoxView HeightRequest="10"
+                                             HorizontalOptions="StartAndExpand"
+                                             Color="Green"
+                                             WidthRequest="{Binding BaseStat}">
+                                    </BoxView>
+                                </Grid>
+                                
+                                
+
+
+
+
+                            </Grid>
+                            
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+                 
+            </VerticalStackLayout>
+            
+            
+            
+
+        </Grid>
+
+
+        
+        
+    </ScrollView>
+    
+    
+</ContentPage>

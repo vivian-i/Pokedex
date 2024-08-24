@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- pokemon types frame style -->
+    <Style x:Key="pokemonTypesFrame" TargetType="Frame">
+        <Setter Property="Padding" Value="2"></Setter>
+        <Setter Property="CornerRadius" Value="15"></Setter>
+        <Setter Property="Margin" Value="2"></Setter>
+        <Setter Property="Opacity" Value="0.5"></Setter>
+    </Style>
+
+</ResourceDictionary>

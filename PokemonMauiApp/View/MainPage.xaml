@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:PokemonMauiApp.Model"
+             xmlns:viewmodel="clr-namespace:PokemonMauiApp.ViewModel"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             x:DataType="viewmodel:PokemonsViewModel"
+             Title="{Binding Title}"
+             ios:Page.UseSafeArea="True"
+             x:Class="PokemonMauiApp.View.MainPage"
+             >
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Refresh"/>
+    </ContentPage.ToolbarItems>
+    
+    <Grid ColumnDefinitions="*"
+          RowDefinitions="*,Auto">
+        
+        <RefreshView Command="{Binding GetPokemonsByIdCommand}"
+                     Grid.ColumnSpan="{OnIdiom Desktop=3, Default=2}"
+                     IsRefreshing="{Binding IsRefreshing}">
+        <!-- Pokemon collection view -->
+            <CollectionView ItemsSource="{Binding Pokemons}"
+                            SelectionMode="None">
+                <!-- empty view: page not found -->
+            <CollectionView.EmptyView>
+                    <StackLayout WidthRequest="350"
+                                 HeightRequest="200"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center">
+                        <Image Source="notfound.jpg"
+                               Aspect="AspectFill"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               ></Image>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+            <!-- layout: vertical grid with 2 cols -->
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="{OnIdiom Desktop=3, Default=2}"
+                                 HorizontalItemSpacing="1"
+                                 VerticalItemSpacing="5"
+                                 />
+            </CollectionView.ItemsLayout>
+            
+            <!-- pokemon item -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Pokemon">
+                    <!-- frame -->
+                    <Frame HeightRequest="175"
+                               Padding="0"
+                               BackgroundColor="{Binding Color}"
+                               CornerRadius="15">
+                        <!-- frame gesture: when user tap on a pokemon, go to detail page of that pokemon -->
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:PokemonsViewModel}}, Path=GoToDetailsCommand}"
+                                />
+                        </Frame.GestureRecognizers>
+                        
+                        <!-- pokemon properties: image, name and list of types -->
+                        <Grid Padding="0"
+                            ColumnDefinitions="*, Auto">
+                            <!-- image -->
+                            <Image Source="{Binding Sprites.Other.OfficialArtwork.FrontDefault }"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="EndAndExpand"
+                                    VerticalOptions="EndAndExpand"
+                                    Margin="0,15,0,0"
+                                    Grid.Column="1"></Image>           
+
+                            <!-- name and types -->
+                            <VerticalStackLayout Grid.Column="0"
+                                                    VerticalOptions="Start"
+                                                    HorizontalOptions="Start"
+                                                    Padding="5"
+                                                    Margin="20,30,0,0"
+                                                    >
+                                <!-- name -->
+                                <Label Text="{Binding Name}"
+                                        FontSize="17"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        FontFamily="Arial"
+                                        CharacterSpacing="1"
+                                        Margin="5,0,0,10"
+                                        ></Label>
+
+                                <!-- list of types -->
+                                <CollectionView ItemsSource="{Binding Types}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="model:Type">
+                                            <Frame Style="{StaticResource pokemonTypesFrame}">
+                                                <Label Text="{Binding Type2.Name}"
+                                                        HorizontalTextAlignment="Center"
+                                                        VerticalTextAlignment="Center"
+                                                        ></Label>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Frame>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        </RefreshView>
+
+
+        <!-- grid for the buttons -->
+        <Grid ColumnDefinitions="*, *"
+              Grid.Row="1"
+              Margin="5">
+        <!-- search button -->
+        <Button Text="Search"
+                Command="{Binding GetPokemonsByIdCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Column="0"></Button>
+
+        <!-- get closest pokemon -->
+        <Button Text="Get Closest Pokemon"
+                Command="{Binding GetClosestPokemonCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Column="1"/>
+        </Grid>
+
+        <!-- isBusy or isNotBusy activity indicator -->
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           Grid.RowSpan="2"
+                           Grid.ColumnSpan="2"></ActivityIndicator>
+
+
+
+
+    </Grid>
+    
+   
+        
+        
+
+
+
+</ContentPage>
